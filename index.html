@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Declaración de Amor 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Contenedor principal */
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Pantalla 1: Inicio */
+        .screen-inicio {
+            text-align: center;
+            z-index: 10;
+        }
+
+        .screen-inicio.hidden {
+            display: none;
+        }
+
+        .titulo-inicio {
+            font-size: 3em;
+            color: white;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: flotar 3s ease-in-out infinite;
+        }
+
+        @keyframes flotar {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .boton-inicio {
+            padding: 20px 40px;
+            font-size: 1.5em;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .boton-inicio:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .boton-inicio:active {
+            transform: scale(0.98);
+        }
+
+        /* Pantalla 2: Pregunta */
+        .screen-pregunta {
+            text-align: center;
+            z-index: 10;
+        }
+
+        .screen-pregunta.hidden {
+            display: none;
+        }
+
+        .foto-ella {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: latido 1.5s ease-in-out infinite;
+        }
+
+        @keyframes latido {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .pregunta {
+            font-size: 2.5em;
+            color: white;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: bold;
+        }
+
+        .botones-respuesta {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .boton-si {
+            padding: 15px 40px;
+            font-size: 1.3em;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 20;
+        }
+
+        .boton-si:hover {
+            background: #45a049;
+        }
+
+        .boton-no {
+            padding: 15px 40px;
+            font-size: 1.3em;
+            background: #f44336;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .boton-no:hover {
+            background: #da190b;
+        }
+
+        /* Pantalla 3: Carta */
+        .screen-carta {
+            z-index: 10;
+        }
+
+        .screen-carta.hidden {
+            display: none;
+        }
+
+        .carta {
+            background: white;
+            border-radius: 20px;
+            padding: 60px 40px;
+            max-width: 600px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: aparecer 0.8s ease;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .titulo-carta {
+            font-size: 2em;
+            color: #764ba2;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .contenido-carta {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #333;
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+
+        .firma {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 1.2em;
+            color: #764ba2;
+            font-weight: bold;
+        }
+
+        .corazon-decorativo {
+            font-size: 2em;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        /* Confetis */
+        .confeti {
+            position: fixed;
+            pointer-events: none;
+            width: 10px;
+            height: 10px;
+            animation: caer 3s linear forwards;
+            z-index: 100;
+        }
+
+        @keyframes caer {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Audio */
+        audio {
+            display: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .titulo-inicio {
+                font-size: 2em;
+            }
+
+            .pregunta {
+                font-size: 1.8em;
+            }
+
+            .carta {
+                padding: 40px 20px;
+            }
+
+            .titulo-carta {
+                font-size: 1.5em;
+            }
+
+            .contenido-carta {
+                font-size: 1em;
+            }
+
+            .botones-respuesta {
+                gap: 15px;
+            }
+
+            .boton-si, .boton-no {
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- PANTALLA 1: INICIO -->
+        <div class="screen-inicio" id="screenInicio">
+            <h1 class="titulo-inicio">Tengo algo importante que decirte 💕</h1>
+            <button class="boton-inicio" onclick="mostrarPregunta()">Presiona aquí, preciosa ✨</button>
+        </div>
+
+        <!-- PANTALLA 2: PREGUNTA -->
+        <div class="screen-pregunta hidden" id="screenPregunta">
+            <img src="preciosa.jpg.jpeg" alt="Tu foto" class="foto-ella" id="fotoElla">
+            <h2 class="pregunta">¿Quieres ser mi novia? 💕</h2>
+            <div class="botones-respuesta">
+                <button class="boton-si" onclick="aceptar()">¡Sí, quiero! 💕</button>
+                <button class="boton-no" id="botonNo" onclick="rechazar()">No</button>
+            </div>
+        </div>
+
+        <!-- PANTALLA 3: CARTA -->
+        <div class="screen-carta hidden" id="screenCarta">
+            <div class="carta">
+                <h2 class="titulo-carta">Mi amor 💕</h2>
+                <div class="corazon-decorativo">❤️</div>
+                
+                <p class="contenido-carta">
+                    Desde el primer momento que te vi, mi corazón supo que eras especial. 
+                    Cada día a tu lado es una bendición, y cada sonrisa tuya ilumina mi mundo.
+                </p>
+
+                <p class="contenido-carta">
+                    Te quiero por tu belleza, no solo la física, sino la que brilla desde tu corazón. 
+                    Quiero ser la persona que te haga sonreír cada día, que esté a tu lado en los buenos 
+                    momentos y que te acompañe en los difíciles.
+                </p>
+
+                <p class="contenido-carta">
+                    Eres mi razón de sonreír, mi inspiración cada mañana, y el sueño que quiero que 
+                    se haga realidad. No sé qué me deparará el futuro, pero sé que contigo quiero 
+                    vivirlo.
+                </p>
+
+                <p class="contenido-carta">
+                    Gracias por existir, por ser tú, por llenar de color mis días. 
+                    Te amo con todo mi corazón.
+                </p>
+
+                <div class="corazon-decorativo">💕 💕 💕</div>
+                <div class="firma">Con todo mi amor,<br>Tu enamorado 💞</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio de fondo -->
+    <audio id="musica" loop>
+        
+        <source src="amor.mp3.mp4" type="audio/mpeg">
+        Tu navegador no soporta audio.
+    </audio>
+
+    <script>
+        let contadorNos = 0;
+        const musica = document.getElementById('musica');
+        const botonNo = document.getElementById('botonNo');
+
+        // Reproducir música al cargar
+        window.addEventListener('load', function() {
+            musica.play().catch(function(error) {
+                console.log('Nota: La música no se puede reproducir automáticamente sin interacción del usuario');
+            });
+        });
+
+        
+        document.addEventListener('click', function() {
+            if (musica.paused) {
+                musica.play();
+            }
+        });
+
+        function mostrarPregunta() {
+            document.getElementById('screenInicio').classList.add('hidden');
+            document.getElementById('screenPregunta').classList.remove('hidden');
+            musica.play().catch(function(error) {
+                console.log('Reproduciendo música...');
+            });
+        }
+
+        function aceptar() {
+            // Crear confetis
+            crearConfetis();
+            
+            // Esperar un poco para mostrar la carta
+            setTimeout(function() {
+                document.getElementById('screenPregunta').classList.add('hidden');
+                document.getElementById('screenCarta').classList.remove('hidden');
+            }, 1000);
+        }
+
+        function rechazar() {
+            contadorNos++;
+            
+            const botonSi = document.querySelector('.boton-si');
+            
+            // Hacer crecer el botón de Sí
+            botonSi.style.padding = (15 + contadorNos * 8) + 'px ' + (40 + contadorNos * 15) + 'px';
+            botonSi.style.fontSize = (1.3 + contadorNos * 0.15) + 'em';
+
+            
+            const mensajes = ['No', '¿Segura?', 'Piénsalo...', 'Por favor...', '¡Vamos! 💕', 
+                            'Dame una oportunidad', 'Seré bueno contigo', '🥺 Por favor'];
+            if (contadorNos <= mensajes.length) {
+                botonNo.textContent = mensajes[contadorNos - 1];
+            }
+
+            // Después de muchos intentos, forzar que acepte (opcional y divertido)
+            if (contadorNos > 10) {
+                setTimeout(aceptar, 500);
+            }
+        }
+
+        function crearConfetis() {
+            const colores = ['#ff1744', '#f50057', '#d500f9', '#651fff', '#2196f3', '#00b0ff', '#00e5ff', '#1de9b6', '#00e676', '#76ff03', '#ffea00', '#ffc400', '#ff9100', '#ff3d00'];
+            
+            for (let i = 0; i < 100; i++) {
+                const confeti = document.createElement('div');
+                confeti.classList.add('confeti');
+                confeti.style.left = Math.random() * window.innerWidth + 'px';
+                confeti.style.top = '-10px';
+                confeti.style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
+                confeti.style.opacity = Math.random() * 0.5 + 0.5;
+                confeti.style.width = Math.random() * 15 + 5 + 'px';
+                confeti.style.height = confeti.style.width;
+                
+                document.body.appendChild(confeti);
+
+                setTimeout(() => {
+                    confeti.remove();
+                }, 3000);
+            }
+        }
+
+        // Mostrar nueva foto personalmente cuando quieras
+        function cambiarFoto(urlFoto) {
+            document.getElementById('fotoElla').src = urlFoto;
+        }
+    </script>
+</body>
+</html>
